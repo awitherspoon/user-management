@@ -12,7 +12,7 @@ import {HomeContainer} from 'components/Home'
 
 let createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
 let store = createStoreWithMiddleware(reducer)
-// setState()
+setState()
 
 const history = createHistory({
   queryKey: false
