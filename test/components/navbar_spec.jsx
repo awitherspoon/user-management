@@ -2,7 +2,7 @@ import React from 'react/addons'
 import {Navbar} from '../../src/app/components/Navbar'
 import {expect} from 'chai'
 
-const {renderIntoDocument, scryRenderedDOMComponentsWithTag, scryRenderedDOMComponentsWithClass, Simulate} = React.addons.TestUtils
+const {renderIntoDocument, scryRenderedDOMComponentsWithClass} = React.addons.TestUtils
 
 describe('Navbar', () => {
   it('Does not render nav options without auth', () => {
