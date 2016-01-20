@@ -35,7 +35,9 @@ export const UserTable = React.createClass({
           <h3>{currentUser.name + "'s"} Groups:</h3>
           <hr/>
           {
-            currentUser ? currentUser.groups.map(g => g + ' ') : null
+            currentUser ? currentUser.groups.map(g => {
+              return (<div className='user-group-item'><a href='#/groups'>{g}</a></div>)
+            }) : null
           }
         </Dialog> : null
     )
