@@ -3,16 +3,20 @@
 .add-group-form {
   margin: 0 auto;
   padding-top: 60px;
-  width: 25%;
+  width: 300px;
   text-align: center;
   @media only screen and (max-width: 638px) {
     margin: 0 auto;
     width: 100%;
   }
+  .add-group-submit-button {
+    display: inline-block;
+  }
 }
 .group-list {
   margin: 60px auto 0px;
   padding: 20px;
+  text-align: center;
   .group-list-item {
     display: inline-block;
     margin: 0px 10px 30px 10px;
@@ -24,10 +28,18 @@
     @media only screen and (max-width: 723px) {
       width: 100%;
     }
+    .group-list-title {
+      padding: 15px;
+      font-size: 24px;
+      text-align: center;
+    }
+    .group-list-buttons {
+      text-align: center;
+    }
     ul {
-      display: inline-block;
+      text-align: left;
       li {
-        display: block;
+        display: inline-block;
       }
     }
   }

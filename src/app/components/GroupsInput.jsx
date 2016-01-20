@@ -44,7 +44,9 @@ export const GroupsInput = React.createClass({
       <div>
         <div className='add-group-form'>
           <TextField value={this.state.inputValue} errorText={this.state.floatingErrorText} floatingLabelText='Name' onChange={this._handleInputChange} />
-          <RaisedButton style={{marginTop: '25px'}} label='Submit' primary={true} disabled={this.state.disabled} onClick={this._addNewGroup} />
+          <div className='add-group-submit-button'>
+            <RaisedButton style={{marginTop: '25px'}} label='Submit' primary={true} disabled={this.state.disabled} onClick={this._addNewGroup} />
+          </div>
         </div>
         <div className='group-list'>
           {

@@ -43,8 +43,8 @@ export const GroupList = React.createClass({
     const g = this.props.group
     return (
       <div className='group-list-item'>
-        <div>{g.name}</div>
-        <DropDownMenu style={{minWidth: '320px'}} value={this.state.dropdownValue} onChange={this._handleDropdownChange}>
+        <div className='group-list-title'>{g.name}</div>
+        <DropDownMenu style={{minWidth: '100%'}} value={this.state.dropdownValue} onChange={this._handleDropdownChange}>
           {
             this.props.users.map(u => {
               if (_.includes(u.groups, g.name)) {
@@ -54,7 +54,15 @@ export const GroupList = React.createClass({
             })
           }
         </DropDownMenu>
-        <RaisedButton style={{marginTop: '25px'}} label='Add User' primary={true} disabled={this.state.disabled} onClick={this._addUserToGroup} />
+        <div className='group-list-buttons'>
+          <RaisedButton style={{display: 'inline-block', marginTop: '25px'}} label='Add User' primary={true} disabled={this.state.disabled} onClick={this._addUserToGroup} />
+          {
+            g.members.length < 1 ?
+              <div className='group-delete-button'>
+                <RaisedButton style={{display: 'inline-block', marginTop: '25px'}} label='Delete Group' danger={true} onClick={this._deleteGroup}/>
+              </div> : null
+          }
+        </div>
         <ul>
           {
             g.members.length > 0 ? g.members.map(m => {
@@ -72,7 +80,7 @@ export const GroupList = React.createClass({
                   })
                 }
               </li>)
-            }) : <RaisedButton style={{marginTop: '25px'}} label='Delete Group' danger={true} onClick={this._deleteGroup}/>
+            }) : null
           }
         </ul>
       </div>
