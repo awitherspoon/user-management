@@ -17,7 +17,7 @@ export const Home = React.createClass({
 
   render () {
     let display
-    this.props.auth ? display = 'Hello World' : display = <RaisedButton label='Login' success={true} onClick={this._getAuth}/>
+    this.props.auth ? display = <div style={{fontSize: 32}}>Hello World</div> : display = <RaisedButton label='Login' secondary={true} onClick={this._getAuth}/>
     return (
       <div className='home'>
         <div className='title'>{display}</div>

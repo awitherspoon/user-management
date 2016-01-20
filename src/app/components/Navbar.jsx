@@ -10,7 +10,6 @@ export const Navbar = React.createClass({
   },
 
   render () {
-    console.log(this.props.auth)
     const loggedInOptions = (
       <div className='nav-options'>
         <ul>

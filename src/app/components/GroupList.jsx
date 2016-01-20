@@ -15,9 +15,8 @@ export const GroupList = React.createClass({
     return {dropdownValue: null, selectedUser: null, disabled: true}
   },
   _handleDropdownChange (e, index, value) {
-    console.log(e.target.innerHTML)
-    console.log(value)
-    this.setState({dropdownValue: value, selectedUser: e.target.innerHTML})
+    const selectedUser = value + ' ' + e.target.innerHTML
+    this.setState({dropdownValue: value, selectedUser: selectedUser})
     this._handleSubmitDisabled()
   },
   _handleSubmitDisabled () {
@@ -28,7 +27,7 @@ export const GroupList = React.createClass({
     }, 60)
   },
   _addUserToGroup () {
-    this.props.addUserToGroup(this.state.selectedUser, this.state.dropdownValue, true)
+    this.props.addUserToGroup(this.state.selectedUser, this.props.group.id, true)
     this.setState({dropdownValue: null, selectedUser: null, disabled: true})
   },
   _removeUserFromGroup (e) {
@@ -50,16 +49,16 @@ export const GroupList = React.createClass({
               if (_.includes(u.groups, g.name)) {
                 return <MenuItem style={{display: 'none'}} key={u.id} value={u.id} primaryText='--Already In Group--' />
               }
-              return (<MenuItem key={u.id} value={g.id} primaryText={u.id + ' ' + u.name}/>)
+              return (<MenuItem key={u.id} value={u.id} primaryText={u.name}/>)
             })
           }
         </DropDownMenu>
         <div className='group-list-buttons'>
-          <RaisedButton style={{display: 'inline-block', marginTop: '25px'}} label='Add User' primary={true} disabled={this.state.disabled} onClick={this._addUserToGroup} />
+          <RaisedButton style={{display: 'inline-block', marginTop: '25px'}} label='Add User' secondary={true} disabled={this.state.disabled} onClick={this._addUserToGroup} />
           {
             g.members.length < 1 ?
               <div className='group-delete-button'>
-                <RaisedButton style={{display: 'inline-block', marginTop: '25px'}} label='Delete Group' danger={true} onClick={this._deleteGroup}/>
+                <RaisedButton style={{display: 'inline-block', marginTop: '25px'}} label='Delete Group' primary={true} onClick={this._deleteGroup}/>
               </div> : null
           }
         </div>

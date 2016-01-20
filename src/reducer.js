@@ -25,7 +25,6 @@ function setState (state, newState) {
 }
 
 function getAuth (state) {
-  console.log('hi')
   return state.set('auth', true)
 }
 
