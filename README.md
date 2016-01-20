@@ -23,3 +23,4 @@ Some of the features:
 * A quasi-simulated many-to-many relationship between users and groups, deleting one alters the other
 * Unit tested the entirety of the reducer
 * Basic responsiveness
+* The state tree is stored in localstorage every time it updates, to help simulate more permanent data storage
