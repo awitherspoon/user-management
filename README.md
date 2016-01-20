@@ -16,4 +16,4 @@ Some of the features:
 * Input verification
 * User detail (click the user's name on the users page to see a messy list of what groups they are in)
 * Group detail (The group creation and detail/editing is part of the same groups page, separated in to different components)
-
+* A quasi-simulated many-to-many relationship between users and groups, deleting one alters the other
