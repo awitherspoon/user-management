@@ -12,7 +12,7 @@ import {HomeContainer} from 'components/Home'
 import {UsersContainer} from 'components/Users'
 import {GroupsContainer} from 'components/Groups'
 import injectTapEventPlugin from 'react-tap-event-plugin'
-import {localStorageMiddleware} from './localStorageMiddleware'
+// import {localStorageMiddleware} from './localStorageMiddleware'
 
 injectTapEventPlugin()
 let createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
