@@ -92,7 +92,6 @@ export function createUser (user, group) {
 // New group to DB (api/create_group:{groupData})
 export function createGroup (group) {
   return dispatch => {
-    console.log(group)
     dispatch(addGroup(group))
   }
 }
