@@ -19,7 +19,6 @@ let createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
 let store = createStoreWithMiddleware(reducer)
 store.subscribe(() => {
   const currentState = store.getState()
-  console.log(currentState)
   localStorage.setItem('currState', JSON.stringify(currentState))
 })
 setState()
