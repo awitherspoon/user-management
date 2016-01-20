@@ -56,8 +56,8 @@ export const GroupList = React.createClass({
         <div className='group-list-buttons'>
           <RaisedButton style={{display: 'inline-block', marginTop: '25px'}} label='Add User' secondary={true} disabled={this.state.disabled} onClick={this._addUserToGroup} />
           {
-            g.members.length < 1 ?
-              <div className='group-delete-button'>
+            g.members.length < 1
+              ? <div className='group-delete-button'>
                 <RaisedButton style={{display: 'inline-block', marginTop: '25px'}} label='Delete Group' primary={true} onClick={this._deleteGroup}/>
               </div> : null
           }
@@ -66,14 +66,14 @@ export const GroupList = React.createClass({
           {
             g.members.length > 0 ? g.members.map(m => {
               return (<li key={m.user}>
-                <IconButton tooltip='Click name to remove user from group' touch={true} tooltipPosition='bottom-center'>
+                <IconButton style={{verticalAlign: 'bottom'}} tooltip='Click name to remove user from group' touch={true} tooltipPosition='bottom-center'>
                   <ActionGrade/>
                 </IconButton>
                 {
                   this.props.users.map(u => {
                     if (m.user == u.name) {
                       return (
-                        <a onClick={this._removeUserFromGroup} key={u.id} id={g.id + ' ' + u.id}>{ m.user }</a>
+                        <a className='group-list-user' onClick={this._removeUserFromGroup} key={u.id} id={g.id + ' ' + u.id}>{ m.user }</a>
                       )
                     }
                   })
