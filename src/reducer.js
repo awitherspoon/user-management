@@ -24,6 +24,12 @@ console.log(stateFromStorage)
 let initialState
 stateFromStorage !== null ? initialState = Map(stateFromStorage) : initialState = noStoredState
 console.log(initialState)
+if (stateFromStorage) {
+  _.forEach(initialState.get('users'), (u) => {
+    console.log(u.id)
+    userCount++
+  })
+}
 
 function setState (state, newState) {
   return state.merge(newState)
