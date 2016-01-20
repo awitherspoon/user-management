@@ -9,7 +9,11 @@ import {setState} from './action_creators'
 import reducer from './reducer'
 import App from './app/App'
 import {HomeContainer} from 'components/Home'
+import {UsersContainer} from 'components/Users'
+import {GroupsContainer} from 'components/Groups'
+import injectTapEventPlugin from 'react-tap-event-plugin'
 
+injectTapEventPlugin()
 let createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
 let store = createStoreWithMiddleware(reducer)
 setState()
@@ -20,6 +24,8 @@ const history = createHistory({
 
 const routes = <Route component={App}>
   <Route path='/' component={HomeContainer} />
+  <Route path='/users' component={UsersContainer} />
+  <Route path='/groups' component={GroupsContainer} />
 </Route>
 
 DOM.render(

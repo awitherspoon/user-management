@@ -1,0 +1,66 @@
+@import './helpers';
+
+.add-user-form {
+  float: left;
+  margin-right: 25px;
+  padding-top: 60px;
+  width: 30%;
+  text-align: center;
+  @media only screen and (max-width: 638px) {
+    margin: 0 auto;
+    width: 100%;
+  }
+  h4 {
+    margin-bottom: 0px;
+  }
+  input {
+    height: 30px;
+    width: 180px;
+    font-size: 20px;
+  }
+}
+
+.user-list {
+  display: inline-block;
+  margin-left: 60px;
+  padding-top: 60px;
+  width: 60%;
+  @media only screen and (max-width: 638px) {
+    margin: 0 auto;
+    width: 100%;
+  }
+  .user-list-labels {
+    font-size: 24px;
+    height: 30px;
+    padding: 15px;
+    .user-list-names {
+      display: inline-block;
+      width: 50%;
+      text-align: left;
+    }
+    .user-list-groups {
+      display: inline-block;
+      width: 50%;
+      text-align: right;
+    }
+  }
+  .user-list-item {
+    margin: 2px;
+    border: 1px solid #020202;
+    .border-radius(5px);
+    padding: 15px;
+    .user-list-item-name {
+      float: left;
+      font-size: 18px;
+    }
+    .user-list-item-groups {
+      float: right;
+    }
+  }
+}
+
+.rw-dropdownlist {
+  margin: 0 auto 10px;
+  width: 200px;
+  height: 35px;
+}

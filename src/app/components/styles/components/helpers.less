@@ -1,0 +1,31 @@
+.border-radius(@radius: 3px) {
+  -webkit-border-radius: @radius;
+     -moz-border-radius: @radius;
+          border-radius: @radius;
+}
+
+.padding-start(@pix: 40px) {
+  -webkit-padding-start: @pix;
+     -moz-padding-start: @pix;
+          padding-start: @pix;
+}
+
+.transition(@t) {
+  -webkit-transition: @t;
+     -moz-transition: @t;
+      -ms-transition: @t;
+       -o-transition: @t;
+          transition: @t;
+}
+
+.grad(@startColor: #555, @endColor: #333) {
+  background-color: @endColor;
+  background-repeat: repeat-x;
+  background-image: -moz-linear-gradient(top, @startColor, @endColor);
+  background-image: -ms-linear-gradient(top, @startColor, @endColor);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, @startColor), color-stop(100%, @endColor));
+  background-image: -webkit-linear-gradient(top, @startColor, @endColor);
+  background-image: -o-linear-gradient(top, @startColor, @endColor);
+  background-image: linear-gradient(top, @startColor, @endColor);
+  filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",@startColor,@endColor));
+}
