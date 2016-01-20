@@ -12,10 +12,16 @@ import {HomeContainer} from 'components/Home'
 import {UsersContainer} from 'components/Users'
 import {GroupsContainer} from 'components/Groups'
 import injectTapEventPlugin from 'react-tap-event-plugin'
+import {localStorageMiddleware} from './localStorageMiddleware'
 
 injectTapEventPlugin()
 let createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
 let store = createStoreWithMiddleware(reducer)
+store.subscribe(() => {
+  const currentState = store.getState()
+  console.log(currentState)
+  localStorage.setItem('currState', JSON.stringify(currentState))
+})
 setState()
 
 const history = createHistory({

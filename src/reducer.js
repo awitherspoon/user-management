@@ -3,7 +3,7 @@ import _ from 'lodash'
 
 let userCount = 0
 let groupCount = 2
-const initialState = Map({
+const noStoredState = Map({
   auth: false,
   users: [],
   groups: [
@@ -19,6 +19,11 @@ const initialState = Map({
     }
   ]
 })
+const stateFromStorage = JSON.parse(localStorage.getItem('currState'))
+console.log(stateFromStorage)
+let initialState
+stateFromStorage !== null ? initialState = Map(stateFromStorage) : initialState = noStoredState
+console.log(initialState)
 
 function setState (state, newState) {
   return state.merge(newState)
