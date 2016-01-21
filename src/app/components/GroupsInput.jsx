@@ -26,28 +26,35 @@ export const GroupsInput = React.createClass({
   },
   _handleInputChange (e) {
     e.target.value ? this._disableErrorText(true) : this._disableErrorText(false)
-    this.setState({inputValue: e.target.value})
-    this._handleSubmitDisabled()
+    this.inputValue = e.target.value
+    this._handleSubmitDisabled(e.target.value)
   },
   _handleDropdownChange (e, index, value) {
     this.setState({dropdownValue: value, selectedUser: e.target.innerHTML})
     this._handleSubmitDisabled()
   },
-  _handleSubmitDisabled () {
-    if (this.state.inputValue != null) {
+  _handleSubmitDisabled (v) {
+    if (v.length && this.state.disabled !== false) {
       this.setState({disabled: false})
+    }
+    if (!v.length) {
+      this.setState({disabled: true})
     }
   },
   _addNewGroup () {
-    this.props.createGroup(this.state.inputValue)
-    this.setState({inputValue: null, floatingErrorText: 'Name is Required', disabled: true})
+    /* HACK: holding the input value in state is causing endless re-rendering
+    sluggishness from Material-UI, this should be worked out a different way.
+     - Andrew */
+    this.props.createGroup(this.inputValue)
+    this.inputValue = ''
+    this.setState({floatingErrorText: 'Name is Required', disabled: true})
   },
 
   render () {
     return (
       <div>
         <div className='add-group-form'>
-          <TextField value={this.state.inputValue} errorText={this.state.floatingErrorText} floatingLabelText='Name' onChange={this._handleInputChange} />
+          <TextField errorText={this.state.floatingErrorText} floatingLabelText='Name' onChange={this._handleInputChange} />
           <div className='add-group-submit-button'>
             <RaisedButton style={{marginTop: '25px'}} label='Submit' secondary={true} disabled={this.state.disabled} onClick={this._addNewGroup} />
           </div>
