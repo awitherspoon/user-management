@@ -16,23 +16,27 @@ export const GroupsInput = React.createClass({
   getInitialState () {
     return {inputValue: null, floatingErrorText: 'Group name is required', disabled: true}
   },
+  _disableErrorText (disable) {
+    if (this.state.floatingErrorText !== false && disable) {
+      this.setState({floatingErrorText: false})
+    }
+    if (!disable) {
+      this.setState({floatingErrorText: 'Group name is required'})
+    }
+  },
   _handleInputChange (e) {
-    e.target.value ? this.setState({floatingErrorText: false}) : this.setState({floatingErrorText: 'Group name is required'})
+    e.target.value ? this._disableErrorText(true) : this._disableErrorText(false)
     this.setState({inputValue: e.target.value})
     this._handleSubmitDisabled()
   },
   _handleDropdownChange (e, index, value) {
-    console.log(e.target.innerHTML)
-    console.log(value)
     this.setState({dropdownValue: value, selectedUser: e.target.innerHTML})
     this._handleSubmitDisabled()
   },
   _handleSubmitDisabled () {
-    setTimeout(() => {
-      if (this.state.inputValue !== null) {
-        this.setState({disabled: false})
-      }
-    }, 60)
+    if (this.state.inputValue != null) {
+      this.setState({disabled: false})
+    }
   },
   _addNewGroup () {
     this.props.createGroup(this.state.inputValue)

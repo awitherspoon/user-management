@@ -21,6 +21,12 @@ export function addUser (user, group) {
   }
 }
 
+export function incrementId () {
+  return {
+    type: 'INCREMENT_ID'
+  }
+}
+
 export function removeUser (user) {
   return {
     type: 'DELETE_USER',
@@ -39,6 +45,12 @@ export function addGroup (group) {
   return {
     type: 'ADD_GROUP',
     group
+  }
+}
+
+export function incrementGroupId () {
+  return {
+    type: 'INCREMENT_GROUP_ID'
   }
 }
 
@@ -87,12 +99,14 @@ export function createUser (user, group) {
   return dispatch => {
     dispatch(addUser(user, group))
     dispatch(addToGroup(user, group))
+    dispatch(incrementId())
   }
 }
 // New group to DB (api/create_group:{groupData})
 export function createGroup (group) {
   return dispatch => {
     dispatch(addGroup(group))
+    dispatch(incrementGroupId())
   }
 }
 // Add user to group in DB (api/add_to_group:{someData})

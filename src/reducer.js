@@ -1,10 +1,10 @@
 import {Map} from 'immutable'
 import _ from 'lodash'
 
-let userCount = 0
-let groupCount = 2
 const noStoredState = Map({
   auth: false,
+  userCount: 0,
+  groupCount: 2,
   users: [],
   groups: [
     {
@@ -24,12 +24,6 @@ console.log(stateFromStorage)
 let initialState
 stateFromStorage !== null ? initialState = Map(stateFromStorage) : initialState = noStoredState
 console.log(initialState)
-if (stateFromStorage) {
-  _.forEach(initialState.get('users'), (u) => {
-    console.log(u.id)
-    userCount++
-  })
-}
 
 function setState (state, newState) {
   return state.merge(newState)
@@ -41,13 +35,19 @@ function getAuth (state) {
 
 function addUser (state, user, group) {
   const newUser = {
-    id: userCount,
+    id: state.get('userCount'),
     name: user,
     groups: []
   }
   newUser.groups.push(group)
-  userCount++
   return state.update('users', users => users.concat(newUser))
+}
+
+function incrementId (state) {
+  let currCount = state.get('userCount')
+  const newCount = currCount + 1
+  console.log(currCount, newCount)
+  return state.set('userCount', newCount)
 }
 
 function cleanUpUserHistory (state, user) {
@@ -75,12 +75,17 @@ function deleteUser (state, user) {
 
 function addGroup (state, group) {
   const newGroup = {
-    id: groupCount,
+    id: state.get('groupCount'),
     name: group,
     members: []
   }
-  groupCount++
   return state.update('groups', groups => groups.concat(newGroup))
+}
+
+function incrementGroupId (state) {
+  const currCount = state.get('groupCount')
+  const newCount = currCount + 1
+  return state.set('groupCount', newCount)
 }
 
 function addUserToGroup (state, user, group) {
@@ -149,12 +154,16 @@ export default function (state = initialState, action) {
       return getAuth(state)
     case 'ADD_USER':
       return addUser(state, action.user, action.group)
+    case 'INCREMENT_ID':
+      return incrementId(state)
     case 'BEFORE_DELETE_USER':
       return cleanUpUserHistory(state, action.user)
     case 'DELETE_USER':
       return deleteUser(state, action.user)
     case 'ADD_GROUP':
       return addGroup(state, action.group)
+    case 'INCREMENT_GROUP_ID':
+      return incrementGroupId(state)
     case 'ADD_USER_TO_GROUP':
       return addUserToGroup(state, action.user, action.group)
     case 'ADD_GROUP_TO_USER':

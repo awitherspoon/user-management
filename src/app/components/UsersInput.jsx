@@ -12,8 +12,13 @@ export const UsersInput = React.createClass({
     return {dropdownValue: null, inputValue: null, floatingErrorText: 'Name is required', disabled: true}
   },
 
+  _disableErrorText () {
+    if (this.state.floatingErrorText !== false) {
+      this.setState({floatingErrorText: false})
+    }
+  },
   _handleInputChange (e) {
-    e.target.value ? this.setState({floatingErrorText: false}) : this.setState({floatingErrorText: 'Name is required'})
+    e.target.value ? this._disableErrorText() : this.setState({floatingErrorText: 'Name is required'})
     this.setState({inputValue: e.target.value})
     this._handleSubmitDisabled()
   },
