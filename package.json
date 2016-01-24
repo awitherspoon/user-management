@@ -4,7 +4,7 @@
   "description": "Front end user management example",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-core/register --require mock-local-storage ./test/test-helper.js 'test/**/*.@(js|jsx)'",
+    "test": "mocha --compilers js:babel-core/register --require ./test/test-helper.js 'test/**/*.@(js|jsx)'",
     "start": "node server",
     "build": "NODE_ENV=production webpack --config ./webpack.production.config.js -p --progress --profile --colors",
     "dev": "rm -rf ./dist/bundle.js && rm -rf ./dist/bundle.js.map && npm start"
