@@ -19,11 +19,14 @@ const noStoredState = Map({
     }
   ]
 })
-const stateFromStorage = JSON.parse(localStorage.getItem('currState'))
-console.log(stateFromStorage)
-let initialState
-stateFromStorage !== null ? initialState = Map(stateFromStorage) : initialState = noStoredState
-console.log(initialState)
+// Get existing state from browser storage, or if !exist, use pre-made state
+const initialState = generateInitialState()
+function generateInitialState () {
+  const stateFromStorage = JSON.parse(localStorage.getItem('currState'))
+  let initialState
+  stateFromStorage !== null ? initialState = Map(stateFromStorage) : initialState = noStoredState
+  return initialState
+}
 
 function setState (state, newState) {
   return state.merge(newState)
@@ -90,7 +93,7 @@ function incrementGroupId (state) {
 
 function addUserToGroup (state, user, group) {
   const groups = state.get('groups')
-  let newUsers = []
+  const newUsers = []
   _.forEach(groups, (g) => {
     if (g.id === group || g.name === group) {
       g.members = g.members.concat({user})

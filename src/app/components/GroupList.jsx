@@ -71,7 +71,7 @@ export const GroupList = React.createClass({
                 </IconButton>
                 {
                   this.props.users.map(u => {
-                    if (m.user == u.name) {
+                    if (m.user === u.name) {
                       return (
                         <a className='group-list-user' onClick={this._removeUserFromGroup} key={u.id} id={g.id + ' ' + u.id}>{ m.user }</a>
                       )

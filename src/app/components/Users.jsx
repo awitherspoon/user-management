@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 import * as actionCreators from '../../action_creators'
 import {UsersInput} from './UsersInput'
 import {UserTable} from './UserTable'
-import _ from 'lodash'
 
 export const Users = React.createClass({
   mixins: [PureRenderMixin],

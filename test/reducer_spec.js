@@ -37,6 +37,7 @@ describe('reducer', () => {
 
   it('adds a user', () => {
     const initialState = Map({
+      userCount: 0,
       users: []
     })
     const action = {
@@ -85,6 +86,7 @@ describe('reducer', () => {
 
   it('adds new groups', () => {
     const initialState = Map({
+      groupCount: 2,
       groups: []
     })
     const action = {

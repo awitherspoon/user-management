@@ -1,6 +1,5 @@
 import React from 'react'
-import _ from 'lodash'
-import {TextField, DropDownMenu, MenuItem, RaisedButton} from 'material-ui'
+import {TextField, RaisedButton} from 'material-ui'
 import {GroupList} from './GroupList'
 
 export const GroupsInput = React.createClass({
