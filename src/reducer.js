@@ -17,7 +17,12 @@ const noStoredState = Map({
       name: 'Bratwürst Chompers',
       members: []
     }
-  ]
+  ],
+  inputValue: '',
+  dropdownValue: '',
+  errorText: 'Name is required',
+  floatingErrorText: true,
+  disabled: true
 })
 // Get existing state from browser storage, or if !exist, use pre-made state
 const initialState = generateInitialState()
@@ -28,6 +33,50 @@ function generateInitialState () {
   return initialState
 }
 
+// Inputs state management
+function resetInputsState (state) {
+  const reset = Map({
+    inputValue: '',
+    dropdownValue: '',
+    floatingErrorText: true,
+    disabled: true
+  })
+  return state.merge(reset)
+}
+
+function toggleErrorText (state, value) {
+  let inputState = state.get('floatingErrorText')
+  if (!inputState && value.length === 0) {
+    inputState = !inputState
+  }
+  if (inputState && value.length > 0) {
+    inputState = !inputState
+  }
+  return state.set('floatingErrorText', inputState)
+}
+
+function toggleDisabled (state) {
+  const dropdownState = state.get('dropdownValue')
+  const inputState = state.get('inputValue')
+  let disabledState = state.get('disabled')
+  if (inputState.length > 0 && dropdownState.length > 0 && disabledState) {
+    disabledState = !disabledState
+    return state.set('disabled', disabledState)
+  }
+  if (inputState.length === 0 && !disabledState) {
+    disabledState = !disabledState
+    return state.set('disabled', disabledState)
+  }
+  return state
+}
+
+function handleInputsValueChange (state, name, value) {
+  let inputState = state.get(name)
+  inputState = value
+  return state.set(name, inputState)
+}
+
+// Everything else state management
 function setState (state, newState) {
   return state.merge(newState)
 }
@@ -177,6 +226,16 @@ export default function (state = initialState, action) {
       return removeGroupFromUser(state, action.group, action.user)
     case 'DELETE_GROUP':
       return deleteGroup(state, action.group)
+    // Input state cases
+    case 'RESET_INPUT_STATE':
+      return resetInputsState(state)
+    case 'SET_INPUT_VALUE':
+    case 'SET_DROPDOWN_VALUE':
+      return handleInputsValueChange(state, action.name, action.value)
+    case 'TOGGLE_ERROR_TEXT':
+      return toggleErrorText(state, action.value)
+    case 'TOGGLE_DISABLED':
+      return toggleDisabled(state)
   }
   return state
 }

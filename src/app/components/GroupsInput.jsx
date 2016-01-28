@@ -3,6 +3,7 @@ import {TextField, RaisedButton} from 'material-ui'
 import {GroupList} from './GroupList'
 
 export const GroupsInput = React.createClass({
+  // TODO: nested verification
   propTypes: {
     addUserToGroup: React.PropTypes.func,
     createGroup: React.PropTypes.func,

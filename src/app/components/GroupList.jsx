@@ -39,14 +39,14 @@ export const GroupList = React.createClass({
   },
 
   render () {
-    const g = this.props.group
+    const group = this.props.group
     return (
       <div className='group-list-item'>
-        <div className='group-list-title'>{g.name}</div>
+        <div className='group-list-title'>{group.name}</div>
         <DropDownMenu style={{minWidth: '100%'}} value={this.state.dropdownValue} onChange={this._handleDropdownChange}>
           {
             this.props.users.map(u => {
-              if (_.includes(u.groups, g.name)) {
+              if (_.includes(u.groups, group.name)) {
                 return <MenuItem style={{display: 'none'}} key={u.id} value={u.id} primaryText='--Already In Group--' />
               }
               return (<MenuItem key={u.id} value={u.id} primaryText={u.name}/>)
@@ -56,7 +56,7 @@ export const GroupList = React.createClass({
         <div className='group-list-buttons'>
           <RaisedButton style={{display: 'inline-block', marginTop: '25px'}} label='Add User' secondary={true} disabled={this.state.disabled} onClick={this._addUserToGroup} />
           {
-            g.members.length < 1
+            group.members.length < 1
               ? <div className='group-delete-button'>
                 <RaisedButton style={{display: 'inline-block', marginTop: '25px'}} label='Delete Group' primary={true} onClick={this._deleteGroup}/>
               </div> : null
@@ -64,7 +64,7 @@ export const GroupList = React.createClass({
         </div>
         <ul>
           {
-            g.members.length > 0 ? g.members.map(m => {
+            group.members.length > 0 ? group.members.map(m => {
               return (<li key={m.user}>
                 <IconButton style={{verticalAlign: 'bottom'}} tooltip='Click name to remove user from group' touch={true} tooltipPosition='bottom-center'>
                   <ActionGrade/>
@@ -73,7 +73,7 @@ export const GroupList = React.createClass({
                   this.props.users.map(u => {
                     if (m.user === u.name) {
                       return (
-                        <a className='group-list-user' onClick={this._removeUserFromGroup} key={u.id} id={g.id + ' ' + u.id}>{ m.user }</a>
+                        <a className='group-list-user' onClick={this._removeUserFromGroup} key={u.id} id={group.id + ' ' + u.id}>{ m.user }</a>
                       )
                     }
                   })

@@ -93,13 +93,66 @@ export function removeGroupFromUser (group, user) {
   }
 }
 
+// Input state control actions
+export function resetInputsState () {
+  return {
+    type: 'RESET_INPUT_STATE'
+  }
+}
+
+export function toggleErrorText (value) {
+  return {
+    type: 'TOGGLE_ERROR_TEXT',
+    value
+  }
+}
+
+export function toggleDisabled () {
+  return {
+    type: 'TOGGLE_DISABLED'
+  }
+}
+
+export function setInputValue (value) {
+  return {
+    type: 'SET_INPUT_VALUE',
+    name: 'inputValue',
+    value
+  }
+}
+
+export function setDropdownValue (value) {
+  return {
+    type: 'SET_DROPDOWN_VALUE',
+    name: 'dropdownValue',
+    value
+  }
+}
+
+export function handleInputChange (e) {
+  return dispatch => {
+    dispatch(toggleErrorText(e.target.value))
+    dispatch(setInputValue(e.target.value))
+    dispatch(toggleDisabled())
+  }
+}
+
+export function handleDropdownChange (e, index, value) {
+  return dispatch => {
+    dispatch(setDropdownValue(value))
+    dispatch(toggleDisabled())
+  }
+}
+
 // Theoretical API calls
 // New user to DB (api/create_user:{userData})
 export function createUser (user, group) {
+  console.log('hi')
   return dispatch => {
     dispatch(addUser(user, group))
     dispatch(addToGroup(user, group))
     dispatch(incrementId())
+    dispatch(resetInputsState())
   }
 }
 // New group to DB (api/create_group:{groupData})
